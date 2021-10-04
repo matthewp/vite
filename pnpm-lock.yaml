@@ -673,7 +673,7 @@ importers:
       dotenv: ^10.0.0
       dotenv-expand: ^5.1.0
       es-module-lexer: ^0.9.2
-      esbuild: ^0.13.2
+      esbuild: ^0.12.28
       estree-walker: ^2.0.2
       etag: ^1.8.1
       execa: ^5.1.1
@@ -706,7 +706,7 @@ importers:
       types: link:./types
       ws: ^7.5.5
     dependencies:
-      esbuild: 0.13.2
+      esbuild: 0.12.29
       postcss: 8.3.8
       resolve: 1.20.0
       rollup: 2.57.0
@@ -3904,6 +3904,7 @@ packages:
     cpu: [arm64]
     os: [android]
     requiresBuild: true
+    dev: true
     optional: true
 
   /esbuild-darwin-64/0.13.2:
@@ -3911,6 +3912,7 @@ packages:
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
+    dev: true
     optional: true
 
   /esbuild-darwin-arm64/0.13.2:
@@ -3918,6 +3920,7 @@ packages:
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
+    dev: true
     optional: true
 
   /esbuild-freebsd-64/0.13.2:
@@ -3925,6 +3928,7 @@ packages:
     cpu: [x64]
     os: [freebsd]
     requiresBuild: true
+    dev: true
     optional: true
 
   /esbuild-freebsd-arm64/0.13.2:
@@ -3932,6 +3936,7 @@ packages:
     cpu: [arm64]
     os: [freebsd]
     requiresBuild: true
+    dev: true
     optional: true
 
   /esbuild-linux-32/0.13.2:
@@ -3939,6 +3944,7 @@ packages:
     cpu: [ia32]
     os: [linux]
     requiresBuild: true
+    dev: true
     optional: true
 
   /esbuild-linux-64/0.13.2:
@@ -3946,6 +3952,7 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
+    dev: true
     optional: true
 
   /esbuild-linux-arm/0.13.2:
@@ -3953,6 +3960,7 @@ packages:
     cpu: [arm]
     os: [linux]
     requiresBuild: true
+    dev: true
     optional: true
 
   /esbuild-linux-arm64/0.13.2:
@@ -3960,6 +3968,7 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
+    dev: true
     optional: true
 
   /esbuild-linux-mips64le/0.13.2:
@@ -3967,6 +3976,7 @@ packages:
     cpu: [mips64el]
     os: [linux]
     requiresBuild: true
+    dev: true
     optional: true
 
   /esbuild-linux-ppc64le/0.13.2:
@@ -3974,6 +3984,7 @@ packages:
     cpu: [ppc64]
     os: [linux]
     requiresBuild: true
+    dev: true
     optional: true
 
   /esbuild-openbsd-64/0.13.2:
@@ -3981,6 +3992,7 @@ packages:
     cpu: [x64]
     os: [openbsd]
     requiresBuild: true
+    dev: true
     optional: true
 
   /esbuild-sunos-64/0.13.2:
@@ -3988,6 +4000,7 @@ packages:
     cpu: [x64]
     os: [sunos]
     requiresBuild: true
+    dev: true
     optional: true
 
   /esbuild-windows-32/0.13.2:
@@ -3995,6 +4008,7 @@ packages:
     cpu: [ia32]
     os: [win32]
     requiresBuild: true
+    dev: true
     optional: true
 
   /esbuild-windows-64/0.13.2:
@@ -4002,6 +4016,7 @@ packages:
     cpu: [x64]
     os: [win32]
     requiresBuild: true
+    dev: true
     optional: true
 
   /esbuild-windows-arm64/0.13.2:
@@ -4009,7 +4024,14 @@ packages:
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
+    dev: true
     optional: true
+
+  /esbuild/0.12.29:
+    resolution: {integrity: sha512-w/XuoBCSwepyiZtIRsKsetiLDUVGPVw1E/R3VTFSecIy8UR7Cq3SOtwKHJMFoVqqVG36aGkzh4e8BvpO1Fdc7g==}
+    hasBin: true
+    requiresBuild: true
+    dev: false
 
   /esbuild/0.13.2:
     resolution: {integrity: sha512-/tpIqo45hyRREGqh7hsIut8GwY1X2n9IhKbIwRIXUO6IohzG3/RarSGX7dT2eNvYzIbQmelpX+ZyuIphE5u+Bw==}
@@ -4032,6 +4054,7 @@ packages:
       esbuild-windows-32: 0.13.2
       esbuild-windows-64: 0.13.2
       esbuild-windows-arm64: 0.13.2
+    dev: true
 
   /escalade/3.1.1:
     resolution: {integrity: sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==}
