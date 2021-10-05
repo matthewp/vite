@@ -188,7 +188,6 @@ function nodeRequire(
   preserveSymlinks: boolean
 ) {
   const mdl = require(resolve(id, importer, root, preserveSymlinks))
-  console.log('NODE_REQUIRE', id)
   return proxyESM(mdl)
 }
 
@@ -213,7 +212,6 @@ function nodeRequireOrImport(
           `Failed to load "${id}"!\nESM format is not natively supported in "node@${process.version}".\nPlease use CommonJS or upgrade to an LTS version of node above "node@12.17.0".`
         )
       } else if (e.code === 'ERR_REQUIRE_ESM') {
-        console.log('NODE_IMPORT', resolvedPath)
         const url = pathToFileURL(resolvedPath)
         try {
           return NATIVE_IMPORT(url.toString()).then(
