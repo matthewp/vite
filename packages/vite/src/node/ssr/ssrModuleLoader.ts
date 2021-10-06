@@ -1,13 +1,8 @@
 import fs from 'fs'
 import path from 'path'
-<<<<<<< HEAD
 import { pathToFileURL } from 'url'
-=======
-import { pathToFileURL } from 'url';
-import { builtinModules } from 'module';
->>>>>>> 4e872a1e (refactor: apply feedback)
 import { ViteDevServer } from '..'
-import { cleanUrl, isObject, resolveFrom, unwrapId } from '../utils'
+import { cleanUrl, isBuiltin, isObject, resolveFrom, unwrapId } from '../utils'
 import { rebindErrorStacktrace, ssrRewriteStacktrace } from './ssrStacktrace'
 import {
   ssrExportAllKey,
@@ -18,12 +13,10 @@ import {
 } from './ssrTransform'
 import { transformRequest } from '../server/transformRequest'
 
-const builtins = new Set(builtinModules);
-
 // This is a workaround since typescript compiles dynamic imports to `require`.
 // Thankfully, when `typescript@4.5.0` lands it won't and this can be removed!
 // See #5197 for notes
-const nativeImport = eval('u => import(u)');
+const nativeImport = eval('u => import(u)')
 
 interface SSRContext {
   global: NodeJS.Global
@@ -107,11 +100,7 @@ async function instantiateModule(
 
   const ssrImport = async (dep: string) => {
     if (dep[0] !== '.' && dep[0] !== '/') {
-      return nodeImport(
-        dep,
-        mod.file,
-        server.config
-      )
+      return nodeImport(dep, mod.file, server.config)
     }
     dep = unwrapId(dep)
     if (!isCircular(dep) && !pendingImports.get(dep)?.some(isCircular)) {
@@ -193,17 +182,19 @@ async function instantiateModule(
 async function nodeImport(
   id: string,
   importer: string | null,
-  config: ViteDevServer['config'],
+  config: ViteDevServer['config']
 ) {
   let url: string
   // `resolve` doesn't handle `node:` builtins, so handle them directly
-  if (id.startsWith('node:') || builtins.has(id)) {
+  if (id.startsWith('node:') || isBuiltin(id)) {
     url = id
   } else {
-    url = pathToFileURL(resolve(id, importer, config.root, !!config.resolve.preserveSymlinks)).toString()
+    url = pathToFileURL(
+      resolve(id, importer, config.root, !!config.resolve.preserveSymlinks)
+    ).toString()
   }
-  const mod = await nativeImport(url);
-  return proxyESM(id, mod);
+  const mod = await nativeImport(url)
+  return proxyESM(id, mod)
 }
 
 // rollup-style default import interop for cjs
@@ -211,14 +202,16 @@ function proxyESM(id: string, mod: any) {
   return new Proxy(mod, {
     get(mod, prop) {
       if (prop in mod) {
-        return mod[prop];
+        return mod[prop]
       }
       // commonjs interop: module whose exports are not statically analyzable
       if (isObject(mod.default) && prop in mod.default) {
         return mod.default[prop]
       }
       // throw an error like ESM import does
-      throw new SyntaxError(`The requested module '${id}' does not provide an export named '${prop.toString()}'`)
+      throw new SyntaxError(
+        `The requested module '${id}' does not provide an export named '${prop.toString()}'`
+      )
     }
   })
 }
