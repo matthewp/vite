@@ -194,22 +194,11 @@ async function nodeImport(
 
 // rollup-style default import interop for cjs
 function proxyESM(id: string, mod: any) {
+  const defaultExport = mod.__esModule ? mod.default : mod
   return new Proxy(mod, {
     get(mod, prop) {
-      if (prop in mod) {
-        return mod[prop]
-      }
-      // commonjs interop: module whose exports are not statically analyzable
-      if (isObject(mod.default) && prop in mod.default) {
-        return mod.default[prop]
-      }
-      if (prop === 'then') {
-        return undefined;
-      }
-      // throw an error like ESM import does
-      throw new SyntaxError(
-        `The requested module '${id}' does not provide an export named '${prop.toString()}'`
-      )
+      if (prop === 'default') return defaultExport
+      return mod[prop]
     }
   })
 }
