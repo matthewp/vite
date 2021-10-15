@@ -186,7 +186,7 @@ async function nodeImport(
   } else {
     url = pathToFileURL(
       resolve(id, importer, config.root, !!config.resolve.preserveSymlinks)
-    ).toString()
+    ).pathname
   }
   const mod = await dynamicImport(url)
   return proxyESM(id, mod)
@@ -202,6 +202,9 @@ function proxyESM(id: string, mod: any) {
       // commonjs interop: module whose exports are not statically analyzable
       if (isObject(mod.default) && prop in mod.default) {
         return mod.default[prop]
+      }
+      if (prop === 'then') {
+        return undefined;
       }
       // throw an error like ESM import does
       throw new SyntaxError(
