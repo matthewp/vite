@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { pathToFileURL } from 'url'
 import { ViteDevServer } from '..'
-import { dynamicImport, cleanUrl, isBuiltin, resolveFrom, unwrapId } from '../utils'
+import { dynamicImport, cleanUrl, isBuiltin, resolveFrom, unwrapId, usingDynamicImport } from '../utils'
 import { rebindErrorStacktrace, ssrRewriteStacktrace } from './ssrStacktrace'
 import {
   ssrExportAllKey,
@@ -185,6 +185,9 @@ async function nodeImport(
     url = id
   } else {
     url = resolve(id, importer, config.root, !!config.resolve.preserveSymlinks)
+    if (usingDynamicImport) {
+      url = pathToFileURL(url).toString()
+    }
   }
   const mod = await dynamicImport(url)
   return proxyESM(id, mod)
