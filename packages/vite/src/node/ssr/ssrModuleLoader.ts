@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { pathToFileURL } from 'url'
 import { ViteDevServer } from '..'
-import { dynamicImport, cleanUrl, isBuiltin, isObject, resolveFrom, unwrapId } from '../utils'
+import { dynamicImport, cleanUrl, isBuiltin, resolveFrom, unwrapId } from '../utils'
 import { rebindErrorStacktrace, ssrRewriteStacktrace } from './ssrStacktrace'
 import {
   ssrExportAllKey,
