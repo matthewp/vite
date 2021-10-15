@@ -184,9 +184,7 @@ async function nodeImport(
   if (id.startsWith('node:') || isBuiltin(id)) {
     url = id
   } else {
-    url = pathToFileURL(
-      resolve(id, importer, config.root, !!config.resolve.preserveSymlinks)
-    ).pathname
+    url = resolve(id, importer, config.root, !!config.resolve.preserveSymlinks)
   }
   const mod = await dynamicImport(url)
   return proxyESM(id, mod)
