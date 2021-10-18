@@ -2,7 +2,14 @@ import fs from 'fs'
 import path from 'path'
 import { pathToFileURL } from 'url'
 import { ViteDevServer } from '..'
-import { dynamicImport, cleanUrl, isBuiltin, resolveFrom, unwrapId, usingDynamicImport } from '../utils'
+import {
+  dynamicImport,
+  cleanUrl,
+  isBuiltin,
+  resolveFrom,
+  unwrapId,
+  usingDynamicImport
+} from '../utils'
 import { rebindErrorStacktrace, ssrRewriteStacktrace } from './ssrStacktrace'
 import {
   ssrExportAllKey,
@@ -195,7 +202,11 @@ async function nodeImport(
 
 // rollup-style default import interop for cjs
 function proxyESM(id: string, mod: any) {
-  const defaultExport = mod.__esModule ? mod.default : mod
+  const defaultExport = mod.__esModule
+    ? mod.default
+    : mod.default
+    ? mod.default
+    : mod
   return new Proxy(mod, {
     get(mod, prop) {
       if (prop === 'default') return defaultExport
