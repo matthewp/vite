@@ -110,12 +110,13 @@ async function instantiateModule(
       if (pendingDeps.length === 1) {
         pendingImports.set(url, pendingDeps)
       }
-      await ssrLoadModule(dep, server, context, urlStack)
+      let val = await ssrLoadModule(dep, server, context, urlStack)
       if (pendingDeps.length === 1) {
         pendingImports.delete(url)
       } else {
         pendingDeps.splice(pendingDeps.indexOf(dep), 1)
       }
+      return val;
     }
     return moduleGraph.urlToModuleMap.get(dep)?.ssrModule
   }
